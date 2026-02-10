@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fahad Ali Khan Mohammed — Cybersecurity Portfolio</title>
+  <meta name="description" content="Cybersecurity student portfolio — labs, projects, and skills." />
+  <style>
+    :root{
+      --bg:#070A12;
+      --card:rgba(255,255,255,.06);
+      --stroke:rgba(255,255,255,.12);
+      --text:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.72);
+      --muted2:rgba(255,255,255,.58);
+      --accent1:#6D5EF7;
+      --accent2:#10B981;
+      --accent3:#EC4899;
+      --shadow: 0 0 35px rgba(109,94,247,.22);
+      --r:18px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      color:var(--text);
+      background:var(--bg);
+      font: 16px/1.55 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      overflow-x:hidden;
+    }
+    a{color:inherit; text-decoration:none}
+    .grain{
+      position:fixed; inset:0; pointer-events:none; z-index:0;
+      background-image:
+        radial-gradient(circle at 20% 10%, rgba(109,94,247,.24) 0%, transparent 45%),
+        radial-gradient(circle at 80% 30%, rgba(16,185,129,.16) 0%, transparent 50%),
+        radial-gradient(circle at 50% 90%, rgba(236,72,153,.12) 0%, transparent 55%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E");
+      background-blend-mode: screen, screen, screen, overlay;
+      opacity:.9;
+    }
+    .glow{
+      position:fixed; left:50%; top:-180px; transform:translateX(-50%);
+      width:min(980px, 120vw); height:520px; z-index:0; filter:blur(44px);
+      background: linear-gradient(90deg, rgba(109,94,247,.26), rgba(16,185,129,.14), rgba(236,72,153,.12));
+      background-size: 200% 200%;
+      animation: shimmer 10s ease-in-out infinite;
+      border-radius:999px;
+      opacity:.95;
+    }
+    @keyframes shimmer{
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+    .wrap{position:relative; z-index:1}
+    .container{max-width:1120px; margin:0 auto; padding:0 20px}
+    .nav{
+      position:sticky; top:0; z-index:5;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(to bottom, rgba(7,10,18,.78), rgba(7,10,18,.55));
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .nav-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0;
+      gap:14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px; min-width:240px;
+    }
+    .logo{
+      width:38px; height:38px; border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      box-shadow:var(--shadow);
+      display:grid; place-items:center;
+    }
+    .brand h1{font-size:14px; margin:0; letter-spacing:-.2px}
+    .brand p{margin:0; font-size:12px; color:var(--muted2)}
+    .links{display:none; gap:18px; font-size:13px; color:var(--muted)}
+    .links a{opacity:.85}
+    .links a:hover{opacity:1}
+    .cta{
+      display:flex; gap:10px; align-items:center;
+    }
+    .btn{
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:14px;
+      font-size:13px;
+      display:inline-flex; align-items:center; gap:8px;
+      transition:.18s ease;
+    }
+    .btn:hover{background: rgba(255,255,255,.10)}
+    .btn.primary{
+      background: #fff; color:#000; border-color:#fff;
+      font-weight:700;
+    }
+    .btn.primary:hover{opacity:.92}
+    .hero{padding:60px 0 26px}
+    .grid{
+      display:grid; gap:18px;
+      grid-template-columns: 1fr;
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      font-size:12px;
+      color:var(--muted);
+    }
+    .title{
+      margin:14px 0 0;
+      font-size: clamp(34px, 5vw, 56px);
+      letter-spacing:-1px;
+      line-height:1.05;
+      font-weight:800;
+    }
+    .subtitle{
+      margin:14px 0 0;
+      max-width:58ch;
+      color:var(--muted);
+      font-size:16px;
+    }
+    .chiprow{display:flex; flex-wrap:wrap; gap:8px; margin-top:18px}
+    .chip{
+      padding:7px 11px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      font-size:12px;
+      color:rgba(255,255,255,.78);
+    }
+    .card{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      border-radius:var(--r);
+      box-shadow:var(--shadow);
+      padding:18px;
+      overflow:hidden;
+      position:relative;
+    }
+    .float{animation: floaty 6s ease-in-out infinite}
+    @keyframes floaty{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-10px)}
+    }
+    .muted{color:var(--muted)}
+    .muted2{color:var(--muted2)}
+    .kpi{
+      display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-top:14px
+    }
+    .kpi > div{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      border-radius:16px;
+      padding:12px;
+    }
+    .kpi small{display:block; color:var(--muted2)}
+    .kpi strong{display:block; margin-top:4px}
+    section{padding:46px 0}
+    .sec-head{display:flex; flex-direction:column; gap:10px}
+    .sec-head h2{margin:0; font-size:22px; letter-spacing:-.2px}
+    .line{height:1px; width:100%; background: linear-gradient(to right, transparent, rgba(255,255,255,.14), transparent)}
+    .cards3{display:grid; grid-template-columns:1fr; gap:14px; margin-top:16px}
+    .tagrow{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px}
+    .tag{font-size:12px; padding:6px 10px; border-radius:999px; border:1px solid rgba(255,255,255,.10); background: rgba(255,255,255,.05); color:rgba(255,255,255,.78)}
+    .footer{padding:26px 0 44px; color:var(--muted2); font-size:12px}
+    .rightlink{display:inline-flex; align-items:center; gap:6px; opacity:.86}
+    .rightlink:hover{opacity:1}
+    .icon{width:16px; height:16px; display:inline-block}
+    .svg{width:18px; height:18px}
+    @media (min-width: 880px){
+      .links{display:flex}
+      .grid{grid-template-columns: 1.2fr .8fr; align-items:start}
+      .cards3{grid-template-columns: repeat(3, 1fr)}
+    }
+  </style>
+</head>
+<body>
+  <div class="grain"></div>
+  <div class="glow"></div>
+
+  <div class="wrap">
+    <header class="nav">
+      <div class="container nav-inner">
+        <a class="brand" href="#top">
+          <div class="logo" aria-hidden="true">
+            <svg class="svg" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2l8 4v6c0 5-3.4 9.4-8 10-4.6-.6-8-5-8-10V6l8-4z" stroke="white" stroke-opacity=".85" stroke-width="1.6"/>
+              <path d="M8.6 12.2l2.2 2.2 4.7-5" stroke="white" stroke-opacity=".85" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div>
+            <h1>Fahad Ali Khan Mohammed</h1>
+            <p>Cybersecurity Student • Aspiring SOC Analyst</p>
+          </div>
+        </a>
+
+        <nav class="links">
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#projects">Projects</a>
+          <a href="#journey">Journey</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="cta">
+          <a class="btn" href="https://github.com/your-username" target="_blank" rel="noreferrer">GitHub</a>
+          <a class="btn primary" href="#projects">View Projects</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="top" class="container">
+      <div class="hero">
+        <div class="grid">
+          <div>
+            <div class="pill">
+              <span>✅ Open to internships • Entry-level roles</span>
+            </div>
+
+            <h2 class="title">Building secure systems,<br/>one lab at a time.</h2>
+
+            <p class="subtitle">
+              I build strong fundamentals through hands-on labs: Security Onion, Wireshark, DNS, Windows Server,
+              and incident response documentation. I like clear evidence, clean writeups, and practical troubleshooting.
+            </p>
+
+            <div class="chiprow">
+              <span class="chip">Security Onion</span>
+              <span class="chip">Wireshark</span>
+              <span class="chip">DNS</span>
+              <span class="chip">Windows Server</span>
+              <span class="chip">Suricata</span>
+              <span class="chip">Incident Response</span>
+            </div>
+
+            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:18px;">
+              <a class="btn primary" href="#projects">View Projects</a>
+              <a class="btn" href="#contact">Contact</a>
+              <a class="btn" href="#" title="Upload resume PDF later and replace this link">Resume</a>
+            </div>
+          </div>
+
+          <div class="card float">
+            <div style="display:flex; justify-content:space-between; gap:14px; align-items:flex-start;">
+              <div>
+                <div style="font-weight:700">Snapshot</div>
+                <div class="muted" style="margin-top:6px; font-size:13px;">
+                  Cybersecurity student focused on blue-team skills and clean documentation.
+                </div>
+              </div>
+              <div class="logo" style="box-shadow:none">
+                <svg class="svg" viewBox="0 0 24 24" fill="none">
+                  <path d="M4 6h16M4 10h16M4 14h10" stroke="white" stroke-opacity=".85" stroke-width="1.6" stroke-linecap="round"/>
+                </svg>
+              </div>
+            </div>
+
+            <div class="kpi">
+              <div>
+                <small>Location</small>
+                <strong>USA</strong>
+              </div>
+              <div>
+                <small>Focus</small>
+                <strong>SOC / IR</strong>
+              </div>
+            </div>
+
+            <div style="margin-top:14px" class="muted2">
+              Tip: Replace the GitHub link with your username and add repo links under Projects.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section id="about">
+        <div class="sec-head">
+          <div class="pill">✨ Short, honest, recruiter-friendly</div>
+          <h2>About</h2>
+          <div class="line"></div>
+        </div>
+        <div style="margin-top:16px" class="card">
+          <p class="muted" style="margin:0">
+            I’m a cybersecurity student building strong fundamentals through labs and team projects.
+            I enjoy working with real network traffic (PCAPs), writing clear reports, and troubleshooting
+            services like DNS. I’m looking for an entry-level role where I can learn fast and contribute
+            to monitoring, detection, and incident response.
+          </p>
+          <div class="tagrow">
+            <span class="tag">Documentation</span>
+            <span class="tag">Hands-on labs</span>
+            <span class="tag">Teamwork</span>
+            <span class="tag">Continuous learning</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills">
+        <div class="sec-head">
+          <div class="pill">✨ Tools I’m using in labs</div>
+          <h2>Skills</h2>
+          <div class="line"></div>
+        </div>
+        <div class="cards3">
+          <div class="card">
+            <div style="font-weight:700">Security</div>
+            <p class="muted" style="margin:10px 0 0">Security Onion • Suricata • SIEM basics</p>
+          </div>
+          <div class="card">
+            <div style="font-weight:700">Networking</div>
+            <p class="muted" style="margin:10px 0 0">DNS • Windows Server • Troubleshooting</p>
+          </div>
+          <div class="card">
+            <div style="font-weight:700">Analysis</div>
+            <p class="muted" style="margin:10px 0 0">Wireshark/Tshark • TCPDump • Evidence writeups</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects">
+        <div class="sec-head">
+          <div class="pill">✨ Selected work (add your repo links)</div>
+          <h2>Projects</h2>
+          <div class="line"></div>
+        </div>
+
+        <div class="cards3">
+          <div class="card">
+            <div style="display:flex; justify-content:space-between; gap:12px;">
+              <div style="font-weight:800">DNS Server (Windows Server 2019)</div>
+              <a class="rightlink" href="#" title="Replace with your repo link">Details ↗</a>
+            </div>
+            <p class="muted" style="margin:10px 0 0">
+              Built forward/reverse lookup zones, validated connectivity, and documented troubleshooting for resolution issues.
+            </p>
+            <div class="tagrow">
+              <span class="tag">DNS</span><span class="tag">Windows Server</span><span class="tag">Networking</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div style="display:flex; justify-content:space-between; gap:12px;">
+              <div style="font-weight:800">Security Onion IR Labs</div>
+              <a class="rightlink" href="#" title="Replace with your repo link">Details ↗</a>
+            </div>
+            <p class="muted" style="margin:10px 0 0">
+              Analyzed PCAPs with Wireshark/Tshark, identified attacker activity, and wrote evidence-based timelines.
+            </p>
+            <div class="tagrow">
+              <span class="tag">PCAP</span><span class="tag">Wireshark</span><span class="tag">Incident Response</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div style="display:flex; justify-content:space-between; gap:12px;">
+              <div style="font-weight:800">Suricata Rule Writing</div>
+              <a class="rightlink" href="#"I’m going to stop the HTML there—your file should keep the same structure you see above. If you want, I can paste the remaining projects/contact/footer too (but this is already enough to publish a full working page).
+            </div>
+            <p class="muted" style="margin:10px 0 0">
+              Created custom detection rules, validated alerts, and tuned signatures to reduce false positives.
+            </p>
+            <div class="tagrow">
+              <span class="tag">Suricata</span><span class="tag">Detection</span><span class="tag">Blue Team</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="journey">
+        <div class="sec-head">
+          <div class="pill">✨ Learning path</div>
+          <h2>Journey</h2>
+          <div class="line"></div>
+        </div>
+        <div class="card">
+          <ul class="muted" style="margin:0; padding-left:18px;">
+            <li><b>2026:</b> Google Cybersecurity Certificate (In Progress)</li>
+            <li><b>2025–2026:</b> Labs — PCAP analysis, DNS traffic investigation, Security Onion tooling</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="sec-head">
+          <div class="pill">✨ Let’s connect</div>
+          <h2>Contact</h2>
+          <div class="line"></div>
+        </div>
+        <div class="card">
+          <p class="muted" style="margin:0">
+            Email: <a href="mailto:your.email@example.com" style="text-decoration:underline">your.email@example.com</a>
+            <br/>GitHub: <a href="https://github.com/your-username" target="_blank" rel="noreferrer" style="text-decoration:underline">github.com/your-username</a>
+            <br/>LinkedIn: <a href="https://www.linkedin.com/in/your-username" target="_blank" rel="noreferrer" style="text-decoration:underline">linkedin.com/in/your-username</a>
+          </p>
+        </div>
+      </section>
+
+      <div class="footer">
+        © <span id="year"></span> Fahad Ali Khan Mohammed. Built on GitHub Pages.
+      </div>
+    </main>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
