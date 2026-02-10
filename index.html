@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Fahad Ali Khan Mohammed — Cybersecurity Portfolio</title>
-  <meta name="description" content="Cybersecurity student portfolio — labs, projects, and skills." />
+  <meta name="description" content="Cybersecurity student portfolio — projects, labs, and skills." />
+  <meta name="theme-color" content="#070A12" />
   <style>
     :root{
       --bg:#070A12;
@@ -12,15 +13,17 @@
       --stroke:rgba(255,255,255,.12);
       --text:rgba(255,255,255,.92);
       --muted:rgba(255,255,255,.72);
-      --muted2:rgba(255,255,255,.58);
-      --accent1:#6D5EF7;
-      --accent2:#10B981;
-      --accent3:#EC4899;
-      --shadow: 0 0 35px rgba(109,94,247,.22);
-      --r:18px;
+      --muted2:rgba(255,255,255,.56);
+      --a:#6D5EF7;   /* indigo */
+      --b:#10B981;   /* emerald */
+      --c:#EC4899;   /* pink */
+      --shadow: 0 0 40px rgba(109,94,247,.22);
+      --r:20px;
+      --r2:26px;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
+
+    *{ box-sizing:border-box }
+    html,body{ height:100% }
     body{
       margin:0;
       color:var(--text);
@@ -28,83 +31,101 @@
       font: 16px/1.55 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       overflow-x:hidden;
     }
-    a{color:inherit; text-decoration:none}
+    a{ color:inherit; text-decoration:none }
+    .container{ max-width:1120px; margin:0 auto; padding:0 20px }
+    .wrap{ position:relative; z-index:1 }
+
+    /* Background layers */
+    #particles{
+      position:fixed; inset:0;
+      width:100%; height:100%;
+      z-index:0;
+      opacity:.85;
+    }
     .grain{
       position:fixed; inset:0; pointer-events:none; z-index:0;
       background-image:
-        radial-gradient(circle at 20% 10%, rgba(109,94,247,.24) 0%, transparent 45%),
-        radial-gradient(circle at 80% 30%, rgba(16,185,129,.16) 0%, transparent 50%),
-        radial-gradient(circle at 50% 90%, rgba(236,72,153,.12) 0%, transparent 55%),
+        radial-gradient(circle at 20% 10%, rgba(109,94,247,.22) 0%, transparent 45%),
+        radial-gradient(circle at 80% 25%, rgba(16,185,129,.14) 0%, transparent 52%),
+        radial-gradient(circle at 40% 95%, rgba(236,72,153,.10) 0%, transparent 55%),
         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E");
       background-blend-mode: screen, screen, screen, overlay;
       opacity:.9;
     }
     .glow{
-      position:fixed; left:50%; top:-180px; transform:translateX(-50%);
-      width:min(980px, 120vw); height:520px; z-index:0; filter:blur(44px);
-      background: linear-gradient(90deg, rgba(109,94,247,.26), rgba(16,185,129,.14), rgba(236,72,153,.12));
-      background-size: 200% 200%;
-      animation: shimmer 10s ease-in-out infinite;
+      position:fixed; left:50%; top:-220px; transform:translateX(-50%);
+      width:min(1100px, 140vw); height:600px;
+      z-index:0; filter:blur(52px);
+      background: linear-gradient(90deg, rgba(109,94,247,.30), rgba(16,185,129,.16), rgba(236,72,153,.14));
+      background-size: 220% 220%;
+      animation: shimmer 11s ease-in-out infinite;
       border-radius:999px;
-      opacity:.95;
+      opacity:.92;
     }
     @keyframes shimmer{
       0%{background-position:0% 50%}
       50%{background-position:100% 50%}
       100%{background-position:0% 50%}
     }
-    .wrap{position:relative; z-index:1}
-    .container{max-width:1120px; margin:0 auto; padding:0 20px}
+
+    /* Navbar */
     .nav{
-      position:sticky; top:0; z-index:5;
+      position:sticky; top:0; z-index:10;
       backdrop-filter: blur(18px);
-      background: linear-gradient(to bottom, rgba(7,10,18,.78), rgba(7,10,18,.55));
+      background: linear-gradient(to bottom, rgba(7,10,18,.80), rgba(7,10,18,.55));
       border-bottom:1px solid rgba(255,255,255,.08);
     }
     .nav-inner{
       display:flex; align-items:center; justify-content:space-between;
-      padding:14px 0;
-      gap:14px;
+      padding:14px 0; gap:14px;
     }
     .brand{
-      display:flex; align-items:center; gap:12px; min-width:240px;
+      display:flex; align-items:center; gap:12px;
+      min-width:240px;
     }
     .logo{
-      width:38px; height:38px; border-radius:14px;
+      width:40px; height:40px; border-radius:16px;
       border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.06);
       box-shadow:var(--shadow);
       display:grid; place-items:center;
     }
-    .brand h1{font-size:14px; margin:0; letter-spacing:-.2px}
-    .brand p{margin:0; font-size:12px; color:var(--muted2)}
-    .links{display:none; gap:18px; font-size:13px; color:var(--muted)}
-    .links a{opacity:.85}
-    .links a:hover{opacity:1}
-    .cta{
-      display:flex; gap:10px; align-items:center;
+    .brand h1{ font-size:14px; margin:0; letter-spacing:-.2px }
+    .brand p{ margin:0; font-size:12px; color:var(--muted2) }
+
+    .links{ display:none; gap:18px; font-size:13px; color:var(--muted) }
+    .links a{ opacity:.85; position:relative }
+    .links a:after{
+      content:""; position:absolute; left:0; bottom:-8px;
+      width:0; height:2px; background:linear-gradient(90deg,var(--a),var(--b));
+      transition:.22s ease;
+      border-radius:999px;
     }
+    .links a:hover{ opacity:1 }
+    .links a:hover:after{ width:100% }
+
+    .cta{ display:flex; align-items:center; gap:10px }
     .btn{
       border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.06);
       color:var(--text);
       padding:10px 12px;
-      border-radius:14px;
+      border-radius:16px;
       font-size:13px;
       display:inline-flex; align-items:center; gap:8px;
       transition:.18s ease;
+      user-select:none;
     }
-    .btn:hover{background: rgba(255,255,255,.10)}
+    .btn:hover{ background: rgba(255,255,255,.10); transform: translateY(-1px) }
     .btn.primary{
-      background: #fff; color:#000; border-color:#fff;
-      font-weight:700;
+      background:#fff; color:#000; border-color:#fff;
+      font-weight:800;
     }
-    .btn.primary:hover{opacity:.92}
-    .hero{padding:60px 0 26px}
-    .grid{
-      display:grid; gap:18px;
-      grid-template-columns: 1fr;
-    }
+    .btn.primary:hover{ opacity:.92 }
+
+    /* Sections */
+    section{ padding:56px 0 }
+    .sec-head{ display:flex; flex-direction:column; gap:10px; margin-bottom:16px }
     .pill{
       display:inline-flex; align-items:center; gap:8px;
       padding:8px 12px;
@@ -113,21 +134,38 @@
       background: rgba(255,255,255,.06);
       font-size:12px;
       color:var(--muted);
+      width:max-content;
+    }
+    .sec-head h2{ margin:0; font-size:22px; letter-spacing:-.2px }
+    .line{ height:1px; width:100%; background: linear-gradient(to right, transparent, rgba(255,255,255,.14), transparent) }
+
+    /* Hero */
+    .hero{ padding:66px 0 22px }
+    .grid{
+      display:grid; gap:18px;
+      grid-template-columns: 1fr;
+      align-items:start;
     }
     .title{
       margin:14px 0 0;
-      font-size: clamp(34px, 5vw, 56px);
+      font-size: clamp(36px, 5.4vw, 64px);
       letter-spacing:-1px;
-      line-height:1.05;
-      font-weight:800;
+      line-height:1.03;
+      font-weight:900;
+    }
+    .title .grad{
+      background: linear-gradient(90deg, rgba(255,255,255,.96), rgba(255,255,255,.68));
+      -webkit-background-clip:text; background-clip:text;
+      color:transparent;
     }
     .subtitle{
       margin:14px 0 0;
-      max-width:58ch;
+      max-width:62ch;
       color:var(--muted);
       font-size:16px;
     }
-    .chiprow{display:flex; flex-wrap:wrap; gap:8px; margin-top:18px}
+
+    .chiprow{ display:flex; flex-wrap:wrap; gap:8px; margin-top:18px }
     .chip{
       padding:7px 11px;
       border-radius:999px;
@@ -136,24 +174,42 @@
       font-size:12px;
       color:rgba(255,255,255,.78);
     }
+
+    /* Cards (glass + 3d hover) */
     .card{
       border:1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.05);
       border-radius:var(--r);
       box-shadow:var(--shadow);
       padding:18px;
-      overflow:hidden;
       position:relative;
+      overflow:hidden;
+      transform-style:preserve-3d;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
     }
-    .float{animation: floaty 6s ease-in-out infinite}
-    @keyframes floaty{
-      0%,100%{transform:translateY(0)}
-      50%{transform:translateY(-10px)}
+    .card:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(70% 60% at 40% 10%, rgba(109,94,247,.18), transparent 58%),
+                  radial-gradient(60% 60% at 80% 20%, rgba(16,185,129,.12), transparent 55%);
+      opacity:.9;
+      pointer-events:none;
+      filter: blur(0px);
     }
-    .muted{color:var(--muted)}
-    .muted2{color:var(--muted2)}
+    .card:hover{
+      background: rgba(255,255,255,.07);
+      border-color: rgba(255,255,255,.16);
+      transform: translateY(-3px);
+    }
+    .card > *{ position:relative; z-index:1 }
+    .muted{ color:var(--muted) }
+    .muted2{ color:var(--muted2) }
+
     .kpi{
-      display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-top:14px
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+      margin-top:14px;
     }
     .kpi > div{
       border:1px solid rgba(255,255,255,.10);
@@ -161,28 +217,116 @@
       border-radius:16px;
       padding:12px;
     }
-    .kpi small{display:block; color:var(--muted2)}
-    .kpi strong{display:block; margin-top:4px}
-    section{padding:46px 0}
-    .sec-head{display:flex; flex-direction:column; gap:10px}
-    .sec-head h2{margin:0; font-size:22px; letter-spacing:-.2px}
-    .line{height:1px; width:100%; background: linear-gradient(to right, transparent, rgba(255,255,255,.14), transparent)}
-    .cards3{display:grid; grid-template-columns:1fr; gap:14px; margin-top:16px}
-    .tagrow{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px}
-    .tag{font-size:12px; padding:6px 10px; border-radius:999px; border:1px solid rgba(255,255,255,.10); background: rgba(255,255,255,.05); color:rgba(255,255,255,.78)}
-    .footer{padding:26px 0 44px; color:var(--muted2); font-size:12px}
-    .rightlink{display:inline-flex; align-items:center; gap:6px; opacity:.86}
-    .rightlink:hover{opacity:1}
-    .icon{width:16px; height:16px; display:inline-block}
-    .svg{width:18px; height:18px}
+    .kpi small{ display:block; color:var(--muted2) }
+    .kpi strong{ display:block; margin-top:4px }
+
+    /* Project cards with image */
+    .cards3{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:14px;
+    }
+    .project{
+      padding:0;
+      border-radius:var(--r2);
+      overflow:hidden;
+    }
+    .pimg{
+      height:170px;
+      background: #0b1020;
+      position:relative;
+      overflow:hidden;
+    }
+    .pimg img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transform: scale(1.04);
+      filter: saturate(1.05) contrast(1.05);
+      transition: transform .55s ease;
+      opacity:.92;
+    }
+    .project:hover .pimg img{ transform: scale(1.10) }
+    .pimg:after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(to top, rgba(7,10,18,.92), rgba(7,10,18,.18), rgba(7,10,18,0));
+    }
+    .pbody{ padding:16px 18px 18px }
+    .ptop{
+      display:flex; justify-content:space-between; gap:12px; align-items:flex-start;
+    }
+    .ptitle{ font-weight:900; letter-spacing:-.2px }
+    .rightlink{ display:inline-flex; align-items:center; gap:6px; opacity:.86; font-size:13px }
+    .rightlink:hover{ opacity:1 }
+    .tagrow{ display:flex; flex-wrap:wrap; gap:8px; margin-top:12px }
+    .tag{
+      font-size:12px; padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      color:rgba(255,255,255,.78);
+    }
+
+    /* Timeline */
+    .timeline{ display:grid; gap:12px; margin-top:10px }
+    .titem{
+      display:grid; grid-template-columns: 110px 1fr; gap:12px; align-items:start;
+      padding:14px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+    }
+    .twhen{
+      display:inline-flex; width:max-content;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      color:rgba(255,255,255,.78);
+      font-size:12px;
+    }
+    .titem h3{ margin:0; font-size:14px; letter-spacing:-.2px }
+    .titem p{ margin:6px 0 0; color:var(--muted); font-size:13px }
+
+    /* Contact */
+    .contact-grid{
+      display:grid; grid-template-columns:1fr;
+      gap:14px;
+    }
+    .contact a.uline{ text-decoration:underline; text-underline-offset:3px }
+
+    .footer{ padding:26px 0 44px; color:var(--muted2); font-size:12px }
+
+    /* Scroll reveal */
+    .reveal{
+      opacity:0;
+      transform: translateY(16px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+    .reveal.show{
+      opacity:1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
     @media (min-width: 880px){
-      .links{display:flex}
-      .grid{grid-template-columns: 1.2fr .8fr; align-items:start}
-      .cards3{grid-template-columns: repeat(3, 1fr)}
+      .links{ display:flex }
+      .grid{ grid-template-columns: 1.2fr .8fr }
+      .cards3{ grid-template-columns: repeat(3, 1fr) }
+      .contact-grid{ grid-template-columns: 1.2fr .8fr }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      .glow{ animation:none }
+      .reveal{ transition:none }
+      .card, .btn, .pimg img{ transition:none }
     }
   </style>
 </head>
 <body>
+  <canvas id="particles"></canvas>
   <div class="grain"></div>
   <div class="glow"></div>
 
@@ -191,9 +335,11 @@
       <div class="container nav-inner">
         <a class="brand" href="#top">
           <div class="logo" aria-hidden="true">
-            <svg class="svg" viewBox="0 0 24 24" fill="none">
-              <path d="M12 2l8 4v6c0 5-3.4 9.4-8 10-4.6-.6-8-5-8-10V6l8-4z" stroke="white" stroke-opacity=".85" stroke-width="1.6"/>
-              <path d="M8.6 12.2l2.2 2.2 4.7-5" stroke="white" stroke-opacity=".85" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2l8 4v6c0 5-3.4 9.4-8 10-4.6-.6-8-5-8-10V6l8-4z"
+                    stroke="white" stroke-opacity=".85" stroke-width="1.7"/>
+              <path d="M8.6 12.2l2.2 2.2 4.7-5"
+                    stroke="white" stroke-opacity=".85" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </div>
           <div>
@@ -211,7 +357,7 @@
         </nav>
 
         <div class="cta">
-          <a class="btn" href="https://github.com/your-username" target="_blank" rel="noreferrer">GitHub</a>
+          <a class="btn" href="https://github.com/fmohammed1-matc" target="_blank" rel="noreferrer">GitHub</a>
           <a class="btn primary" href="#projects">View Projects</a>
         </div>
       </div>
@@ -220,17 +366,24 @@
     <main id="top" class="container">
       <div class="hero">
         <div class="grid">
-          <div>
-            <div class="pill">
-              <span>✅ Open to internships • Entry-level roles</span>
-            </div>
+          <div class="reveal">
+            <div class="pill">✅ Open to internships • Entry-level roles</div>
 
-            <h2 class="title">Building secure systems,<br/>one lab at a time.</h2>
+            <h2 class="title">
+              <span class="grad">Defending networks</span><br/>with labs, logs, and proof.
+            </h2>
 
             <p class="subtitle">
-              I build strong fundamentals through hands-on labs: Security Onion, Wireshark, DNS, Windows Server,
-              and incident response documentation. I like clear evidence, clean writeups, and practical troubleshooting.
+              I’m a cybersecurity student building strong fundamentals through hands-on labs:
+              Security Onion, Wireshark, DNS, Windows Server, and incident response reporting.
+              I focus on clean evidence, clear writeups, and practical troubleshooting.
             </p>
+
+            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:18px;">
+              <a class="btn primary" href="#projects">View Projects</a>
+              <a class="btn" href="#contact">Contact</a>
+              <a class="btn" href="#" title="Upload resume PDF later and replace this link">Resume</a>
+            </div>
 
             <div class="chiprow">
               <span class="chip">Security Onion</span>
@@ -240,25 +393,20 @@
               <span class="chip">Suricata</span>
               <span class="chip">Incident Response</span>
             </div>
-
-            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:18px;">
-              <a class="btn primary" href="#projects">View Projects</a>
-              <a class="btn" href="#contact">Contact</a>
-              <a class="btn" href="#" title="Upload resume PDF later and replace this link">Resume</a>
-            </div>
           </div>
 
-          <div class="card float">
+          <div class="card reveal" data-tilt>
             <div style="display:flex; justify-content:space-between; gap:14px; align-items:flex-start;">
               <div>
-                <div style="font-weight:700">Snapshot</div>
+                <div style="font-weight:900; letter-spacing:-.2px">Snapshot</div>
                 <div class="muted" style="margin-top:6px; font-size:13px;">
-                  Cybersecurity student focused on blue-team skills and clean documentation.
+                  Blue-team focused student: traffic analysis, detection basics, and documentation.
                 </div>
               </div>
               <div class="logo" style="box-shadow:none">
-                <svg class="svg" viewBox="0 0 24 24" fill="none">
-                  <path d="M4 6h16M4 10h16M4 14h10" stroke="white" stroke-opacity=".85" stroke-width="1.6" stroke-linecap="round"/>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <path d="M4 7h16M4 12h16M4 17h10"
+                        stroke="white" stroke-opacity=".85" stroke-width="1.7" stroke-linecap="round"/>
                 </svg>
               </div>
             </div>
@@ -275,24 +423,25 @@
             </div>
 
             <div style="margin-top:14px" class="muted2">
-              Tip: Replace the GitHub link with your username and add repo links under Projects.
+              Tip: Add your LinkedIn + real project links for a resume-ready page.
             </div>
           </div>
         </div>
       </div>
 
       <section id="about">
-        <div class="sec-head">
+        <div class="sec-head reveal">
           <div class="pill">✨ Short, honest, recruiter-friendly</div>
           <h2>About</h2>
           <div class="line"></div>
         </div>
-        <div style="margin-top:16px" class="card">
+
+        <div class="card reveal" data-tilt>
           <p class="muted" style="margin:0">
-            I’m a cybersecurity student building strong fundamentals through labs and team projects.
-            I enjoy working with real network traffic (PCAPs), writing clear reports, and troubleshooting
-            services like DNS. I’m looking for an entry-level role where I can learn fast and contribute
-            to monitoring, detection, and incident response.
+            I’m a cybersecurity student who enjoys working with real network traffic (PCAPs),
+            writing clear incident response reports, and troubleshooting network services like DNS.
+            I’m aiming for an entry-level role where I can learn fast and contribute to monitoring,
+            detection, and incident response.
           </p>
           <div class="tagrow">
             <span class="tag">Documentation</span>
@@ -304,113 +453,275 @@
       </section>
 
       <section id="skills">
-        <div class="sec-head">
+        <div class="sec-head reveal">
           <div class="pill">✨ Tools I’m using in labs</div>
           <h2>Skills</h2>
           <div class="line"></div>
         </div>
+
         <div class="cards3">
-          <div class="card">
-            <div style="font-weight:700">Security</div>
+          <div class="card reveal" data-tilt>
+            <div style="font-weight:900">Security</div>
             <p class="muted" style="margin:10px 0 0">Security Onion • Suricata • SIEM basics</p>
+            <div class="tagrow"><span class="tag">Detection</span><span class="tag">Alert Tuning</span></div>
           </div>
-          <div class="card">
-            <div style="font-weight:700">Networking</div>
+          <div class="card reveal" data-tilt>
+            <div style="font-weight:900">Networking</div>
             <p class="muted" style="margin:10px 0 0">DNS • Windows Server • Troubleshooting</p>
+            <div class="tagrow"><span class="tag">TCP/IP</span><span class="tag">Routing</span></div>
           </div>
-          <div class="card">
-            <div style="font-weight:700">Analysis</div>
+          <div class="card reveal" data-tilt>
+            <div style="font-weight:900">Analysis</div>
             <p class="muted" style="margin:10px 0 0">Wireshark/Tshark • TCPDump • Evidence writeups</p>
+            <div class="tagrow"><span class="tag">PCAP</span><span class="tag">HTTP/SMB</span></div>
           </div>
         </div>
       </section>
 
       <section id="projects">
-        <div class="sec-head">
-          <div class="pill">✨ Selected work (add your repo links)</div>
+        <div class="sec-head reveal">
+          <div class="pill">✨ Visual project cards (swap images anytime)</div>
           <h2>Projects</h2>
           <div class="line"></div>
         </div>
 
         <div class="cards3">
-          <div class="card">
-            <div style="display:flex; justify-content:space-between; gap:12px;">
-              <div style="font-weight:800">DNS Server (Windows Server 2019)</div>
-              <a class="rightlink" href="#" title="Replace with your repo link">Details ↗</a>
+          <!-- Image sources are safe placeholders. You can replace with your own screenshots later. -->
+          <article class="card project reveal" data-tilt>
+            <div class="pimg">
+              <img alt="DNS project visual"
+                   src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1400&q=70" />
             </div>
-            <p class="muted" style="margin:10px 0 0">
-              Built forward/reverse lookup zones, validated connectivity, and documented troubleshooting for resolution issues.
-            </p>
-            <div class="tagrow">
-              <span class="tag">DNS</span><span class="tag">Windows Server</span><span class="tag">Networking</span>
+            <div class="pbody">
+              <div class="ptop">
+                <div class="ptitle">DNS Server (Windows Server 2019)</div>
+                <a class="rightlink" href="#" title="Replace with your repo link">Details ↗</a>
+              </div>
+              <p class="muted" style="margin:10px 0 0">
+                Built forward/reverse lookup zones, validated connectivity, and documented troubleshooting for resolution issues.
+              </p>
+              <div class="tagrow">
+                <span class="tag">DNS</span><span class="tag">Windows Server</span><span class="tag">Networking</span>
+              </div>
             </div>
-          </div>
+          </article>
 
-          <div class="card">
-            <div style="display:flex; justify-content:space-between; gap:12px;">
-              <div style="font-weight:800">Security Onion IR Labs</div>
-              <a class="rightlink" href="#" title="Replace with your repo link">Details ↗</a>
+          <article class="card project reveal" data-tilt>
+            <div class="pimg">
+              <img alt="PCAP analysis visual"
+                   src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1400&q=70" />
             </div>
-            <p class="muted" style="margin:10px 0 0">
-              Analyzed PCAPs with Wireshark/Tshark, identified attacker activity, and wrote evidence-based timelines.
-            </p>
-            <div class="tagrow">
-              <span class="tag">PCAP</span><span class="tag">Wireshark</span><span class="tag">Incident Response</span>
+            <div class="pbody">
+              <div class="ptop">
+                <div class="ptitle">Security Onion IR Labs</div>
+                <a class="rightlink" href="#" title="Replace with your repo link">Details ↗</a>
+              </div>
+              <p class="muted" style="margin:10px 0 0">
+                Analyzed PCAPs with Wireshark/Tshark, identified attacker behavior, and wrote evidence-based timelines.
+              </p>
+              <div class="tagrow">
+                <span class="tag">PCAP</span><span class="tag">Wireshark</span><span class="tag">Incident Response</span>
+              </div>
             </div>
-          </div>
+          </article>
 
-          <div class="card">
-            <div style="display:flex; justify-content:space-between; gap:12px;">
-              <div style="font-weight:800">Suricata Rule Writing</div>
-              <a class="rightlink" href="#"I’m going to stop the HTML there—your file should keep the same structure you see above. If you want, I can paste the remaining projects/contact/footer too (but this is already enough to publish a full working page).
+          <article class="card project reveal" data-tilt>
+            <div class="pimg">
+              <img alt="Detection engineering visual"
+                   src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&w=1400&q=70" />
             </div>
-            <p class="muted" style="margin:10px 0 0">
-              Created custom detection rules, validated alerts, and tuned signatures to reduce false positives.
-            </p>
-            <div class="tagrow">
-              <span class="tag">Suricata</span><span class="tag">Detection</span><span class="tag">Blue Team</span>
+            <div class="pbody">
+              <div class="ptop">
+                <div class="ptitle">Suricata Rule Writing</div>
+                <a class="rightlink" href="#" title="Replace with your repo link">Details ↗</a>
+              </div>
+              <p class="muted" style="margin:10px 0 0">
+                Created custom detection rules, validated alerts, and tuned signatures to reduce false positives.
+              </p>
+              <div class="tagrow">
+                <span class="tag">Suricata</span><span class="tag">Detection</span><span class="tag">Blue Team</span>
+              </div>
             </div>
-          </div>
+          </article>
         </div>
-      </section>
 
-      <section id="journey">
-        <div class="sec-head">
-          <div class="pill">✨ Learning path</div>
-          <h2>Journey</h2>
-          <div class="line"></div>
-        </div>
-        <div class="card">
-          <ul class="muted" style="margin:0; padding-left:18px;">
-            <li><b>2026:</b> Google Cybersecurity Certificate (In Progress)</li>
-            <li><b>2025–2026:</b> Labs — PCAP analysis, DNS traffic investigation, Security Onion tooling</li>
-          </ul>
-        </div>
-      </section>
-
-      <section id="contact">
-        <div class="sec-head">
-          <div class="pill">✨ Let’s connect</div>
-          <h2>Contact</h2>
-          <div class="line"></div>
-        </div>
-        <div class="card">
-          <p class="muted" style="margin:0">
-            Email: <a href="mailto:your.email@example.com" style="text-decoration:underline">your.email@example.com</a>
-            <br/>GitHub: <a href="https://github.com/your-username" target="_blank" rel="noreferrer" style="text-decoration:underline">github.com/your-username</a>
-            <br/>LinkedIn: <a href="https://www.linkedin.com/in/your-username" target="_blank" rel="noreferrer" style="text-decoration:underline">linkedin.com/in/your-username</a>
+        <div class="card reveal" style="margin-top:14px">
+          <div style="font-weight:900; letter-spacing:-.2px">Make it look even more “YOU”</div>
+          <p class="muted" style="margin:10px 0 0">
+            Replace those project images with screenshots from your labs (Security Onion dashboards, Wireshark filters, Windows DNS manager).
+            That will make recruiters trust it more.
           </p>
         </div>
       </section>
 
+      <section id="journey">
+        <div class="sec-head reveal">
+          <div class="pill">✨ Learning path & milestones</div>
+          <h2>Journey</h2>
+          <div class="line"></div>
+        </div>
+
+        <div class="timeline">
+          <div class="titem reveal" data-tilt>
+            <div><span class="twhen">2026</span></div>
+            <div>
+              <h3>Google Cybersecurity Certificate (In Progress)</h3>
+              <p>Studying foundations, history of cyberattacks, security domains, and incident response best practices.</p>
+            </div>
+          </div>
+          <div class="titem reveal" data-tilt>
+            <div><span class="twhen">2025–2026</span></div>
+            <div>
+              <h3>Hands-on labs (VMware / Security Onion / Windows Server)</h3>
+              <p>PCAP analysis, DNS traffic investigation, Suricata rule writing, and technical documentation.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="sec-head reveal">
+          <div class="pill">✨ Let’s connect</div>
+          <h2>Contact</h2>
+          <div class="line"></div>
+        </div>
+
+        <div class="contact-grid">
+          <div class="card reveal" data-tilt>
+            <div style="font-weight:900; letter-spacing:-.2px">Message me</div>
+            <p class="muted" style="margin:10px 0 0">
+              Email: <a class="uline" href="mailto:YOUR_EMAIL_HERE">YOUR_EMAIL_HERE</a><br/>
+              GitHub: <a class="uline" href="https://github.com/fmohammed1-matc" target="_blank" rel="noreferrer">github.com/fmohammed1-matc</a><br/>
+              LinkedIn: <a class="uline" href="YOUR_LINKEDIN_HERE" target="_blank" rel="noreferrer">YOUR_LINKEDIN_HERE</a>
+            </p>
+            <p class="muted2" style="margin:10px 0 0; font-size:13px">
+              Replace <b>YOUR_EMAIL_HERE</b> and <b>YOUR_LINKEDIN_HERE</b> in the HTML to make this live.
+            </p>
+          </div>
+
+          <div class="card reveal" data-tilt>
+            <div style="font-weight:900; letter-spacing:-.2px">Quick polish checklist</div>
+            <p class="muted" style="margin:10px 0 0; font-size:13px">
+              ✅ Add real repo links on each project<br/>
+              ✅ Add 2 screenshots per project<br/>
+              ✅ Upload your resume PDF and link it<br/>
+              ✅ Add 1 paragraph “About me” in your own words
+            </p>
+          </div>
+        </div>
+      </section>
+
       <div class="footer">
-        © <span id="year"></span> Fahad Ali Khan Mohammed. Built on GitHub Pages.
+        © <span id="year"></span> Fahad Ali Khan Mohammed • Built on GitHub Pages
       </div>
     </main>
   </div>
 
   <script>
+    // Year
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Scroll reveal
+    const io = new IntersectionObserver((entries)=>{
+      for (const e of entries){
+        if (e.isIntersecting){
+          e.target.classList.add("show");
+          io.unobserve(e.target);
+        }
+      }
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
+
+    // Simple tilt effect (no library)
+    function clamp(n,min,max){ return Math.max(min, Math.min(max,n)); }
+    document.querySelectorAll("[data-tilt]").forEach(card=>{
+      let rect;
+      const onMove = (ev)=>{
+        rect = rect || card.getBoundingClientRect();
+        const x = (ev.clientX - rect.left) / rect.width;
+        const y = (ev.clientY - rect.top) / rect.height;
+        const rx = clamp((0.5 - y) * 10, -8, 8);
+        const ry = clamp((x - 0.5) * 12, -10, 10);
+        card.style.transform = `translateY(-3px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+      };
+      const onLeave = ()=>{
+        rect = null;
+        card.style.transform = "";
+      };
+      card.addEventListener("mousemove", onMove);
+      card.addEventListener("mouseleave", onLeave);
+    });
+
+    // Cyber particles (canvas) — lightweight
+    const c = document.getElementById("particles");
+    const ctx = c.getContext("2d");
+    const DPR = Math.min(2, window.devicePixelRatio || 1);
+
+    function resize(){
+      c.width = Math.floor(innerWidth * DPR);
+      c.height = Math.floor(innerHeight * DPR);
+      c.style.width = innerWidth + "px";
+      c.style.height = innerHeight + "px";
+      ctx.setTransform(DPR,0,0,DPR,0,0);
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    const N = Math.floor(Math.min(140, Math.max(80, innerWidth / 10)));
+    const pts = Array.from({length:N}, ()=>({
+      x: Math.random()*innerWidth,
+      y: Math.random()*innerHeight,
+      vx: (Math.random()-.5)*0.35,
+      vy: (Math.random()-.5)*0.35,
+      r: Math.random()*1.6 + 0.6
+    }));
+
+    function draw(){
+      ctx.clearRect(0,0,innerWidth, innerHeight);
+
+      // subtle vignette
+      const g = ctx.createRadialGradient(innerWidth/2, innerHeight*0.2, 80, innerWidth/2, innerHeight*0.2, Math.max(innerWidth,innerHeight));
+      g.addColorStop(0, "rgba(109,94,247,0.10)");
+      g.addColorStop(1, "rgba(7,10,18,0)");
+      ctx.fillStyle = g;
+      ctx.fillRect(0,0,innerWidth, innerHeight);
+
+      // points + links
+      for (let i=0;i<pts.length;i++){
+        const p = pts[i];
+        p.x += p.vx; p.y += p.vy;
+
+        if (p.x < -20) p.x = innerWidth+20;
+        if (p.x > innerWidth+20) p.x = -20;
+        if (p.y < -20) p.y = innerHeight+20;
+        if (p.y > innerHeight+20) p.y = -20;
+
+        // draw links
+        for (let j=i+1;j<pts.length;j++){
+          const q = pts[j];
+          const dx = p.x-q.x, dy=p.y-q.y;
+          const d = Math.hypot(dx,dy);
+          if (d < 120){
+            const a = (1 - d/120) * 0.18;
+            ctx.strokeStyle = `rgba(109,94,247,${a})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(q.x, q.y);
+            ctx.stroke();
+          }
+        }
+
+        // draw point
+        ctx.fillStyle = "rgba(255,255,255,0.28)";
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+        ctx.fill();
+      }
+
+      requestAnimationFrame(draw);
+    }
+    draw();
   </script>
 </body>
 </html>
